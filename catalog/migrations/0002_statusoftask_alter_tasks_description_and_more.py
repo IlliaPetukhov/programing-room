@@ -6,23 +6,31 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0001_initial'),
+        ("catalog", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='StatusOfTask',
+            name="StatusOfTask",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('status', models.TextField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("status", models.TextField()),
             ],
         ),
         migrations.AlterField(
-            model_name='tasks',
-            name='description',
+            model_name="tasks",
+            name="description",
             field=models.TextField(),
         ),
         migrations.DeleteModel(
-            name='DescriptionOfTask',
+            name="DescriptionOfTask",
         ),
     ]

@@ -7,13 +7,15 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0002_statusoftask_alter_tasks_description_and_more'),
+        ("catalog", "0002_statusoftask_alter_tasks_description_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='tasks',
-            name='status',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='catalog.statusoftask'),
+            model_name="tasks",
+            name="status",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="catalog.statusoftask"
+            ),
         ),
     ]
