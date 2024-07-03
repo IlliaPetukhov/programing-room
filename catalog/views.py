@@ -20,7 +20,7 @@ from catalog.forms import (
     UserLoginForm,
     UserPasswordResetForm,
     UserSetPasswordForm,
-    UserPasswordChangeForm,
+    UserPasswordChangeForm, TasksViewForm,
 )
 from catalog.models import Programmer, Tasks, LevelOfDifficulty, StatusOfTask
 
@@ -48,13 +48,20 @@ class AboutUs(LoginRequiredMixin, generic.ListView):
     context_object_name = "tasks_list"
     paginate_by = 5
 
+    def get_context_data(self, **kwargs):
+        context = super(AboutUs, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name")
+        context["search_form"] = TasksViewForm(
+            initial={"name": name},
+        )
+        return context
+
     def get_queryset(self):
-        # Получаем queryset всех задач
         queryset = super().get_queryset()
-
-        # Фильтруем задачи по статусу
         queryset = queryset.filter(status__status="you can take this task")
-
+        name = self.request.GET.get("name")
+        if name:
+            queryset = queryset.filter(name__icontains=name)
         return queryset
 
 
@@ -197,9 +204,11 @@ class ChangeTaskStatus(LoginRequiredMixin, View):
                 StatusOfTask, status="somebody is doing this task"
             )
             task.status = new_status
+
         elif task.status.status == "somebody is doing this task":
             new_status = get_object_or_404(StatusOfTask, status="done")
             task.status = new_status
+
         current_user = request.user
 
         if request.user.is_authenticated:
@@ -220,9 +229,14 @@ class MyTaskView(LoginRequiredMixin, generic.ListView, View):
     def get_queryset(self):
         current_user = self.request.user
         filter_by_current_user = Tasks.objects.filter(programmer=current_user)
+
+        print(filter_by_current_user.filter(
+            status__status="somebody is doing this task"
+        ))
         return filter_by_current_user.filter(
             status__status="somebody is doing this task"
         )
+
 
 
 class IfSuperUser(UserPassesTestMixin, View):
@@ -235,6 +249,21 @@ class AllTasksIfAdminView(IfSuperUser, generic.ListView):
     paginate_by = 5
     template_name = "pages/tasks-if-admin.html"
     context_object_name = "tasks_list_if_admin"
+
+    def get_context_data(self, **kwargs):
+        context = super(AllTasksIfAdminView, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name")
+        context["search_form"] = TasksViewForm(
+            initial={"name": name},
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        name = self.request.GET.get("name")
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+        return queryset
 
 
 class CreateTasksView(IfSuperUser, generic.CreateView):

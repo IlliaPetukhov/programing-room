@@ -22,16 +22,30 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8 text-center mx-auto my-auto">
-            <h1 style="padding-top: 30px" class="text-white">List of Tasks</h1>
+            
             <br>
             {% if tasks_list %}
+            <div class="container" style="margin-left: -465px">
+                <div class="row text-center py-2 mt-3">
+                    <div class="col-4 mx-auto">
+                        <form method="get" action="">
+                            <div style="display: flex; align-items: center;">
+                                <form>
+                                    {{ search_form }}
+                                    <button style="font-size: xx-small; margin-top: 15px" type="submit" class="btn btn-secondary">🔍</button>
+                                </form>
+                            </div>
+                        </form>
+                    </div>
+                 </div>
+            </div>    
             <ul style="list-style-type: none; padding-left: 0;">
                 {% for task in tasks_list %}
                     
                     <li style="margin-left: -170px; 
                     text-align: left;" class="lead mb-4 text-white opacity-50">
                          {% if task.level.level == "easy" %}
-                              <span  class="badge bg-gradient-info">{{ task.level.level }} 😌</span>                               
+                              <span  class="badge bg-gradient-info">{{ task.level.level }} 😌</span>
                               <button type="button" class="btn bg-gradient-secondary w-auto me-1 mb-0">
                                     <a style="color: white;" 
                                     onmouseover="this.style.color='red'"; onmouseout="this.style.color='white'" 
@@ -42,8 +56,8 @@
                                         <button style="font-size: xx-small" type="submit" class="btn bg-gradient-secondary w-auto me-1 mb-0">+</button>
                                     </form>
                                 </button>
-                                
-                             
+
+
                              
                               
                          {% elif task.level.level == "medium"%}
@@ -58,8 +72,8 @@
                                         <button style="font-size: xx-small" type="submit" class="btn bg-gradient-secondary w-auto me-1 mb-0">+</button>
                                     </form>
                                 </button>
-                                
-                                
+
+
                          {% elif task.level.level == "hard"%}
                              <span  class="badge bg-gradient-warning">{{ task.level.level }} 😬</span>
                               <button type="button" class="btn bg-gradient-secondary w-auto me-1 mb-0">
@@ -72,7 +86,7 @@
                                         <button style="font-size: xx-small" type="submit" class="btn bg-gradient-secondary w-auto me-1 mb-0">+</button>
                                     </form>
                                 </button>
-                                
+
                          {% elif task.level.level == "very hard"%}
                              <span class="badge bg-gradient-danger">{{ task.level.level }} 🤯</span>
                               <button type="button" class="btn bg-gradient-secondary w-auto me-1 mb-0">
@@ -85,7 +99,7 @@
                                         <button style="font-size: xx-small" type="submit" class="btn bg-gradient-secondary w-auto me-1 mb-0">+</button>
                                     </form>
                                 </button>
-                                
+
                          {% endif %}
                     </li>
                     

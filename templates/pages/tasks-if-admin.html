@@ -19,12 +19,27 @@
     <div class="page-header min-vh-100" style="background-image: url('{% static 'img/curved-images/curved.jpg' %}');">
 
       <span class="mask bg-gradient-info opacity-1"></span>
-      <div class="container">
-        <div class="row justify-content-center">
+      <div style="margin-top: 80px" class="container">
+        <div  class="row justify-content-center">
           <div class="col-lg-8 text-center mx-auto my-auto">
-            <h1 style="padding-top: 30px" class="text-white">List of Tasks</h1>
+            <br>
             <br>
             {% if tasks_list_if_admin %}
+                <div class="container" style="margin-left: -465px">
+                <div class="row text-center py-2 mt-3">
+                    <div class="col-4 mx-auto">
+                        <form method="get" action="">
+                            <div style="display: flex; align-items: center;">
+                                <form>
+                                    {{ search_form }}
+                                    <button style="font-size: xx-small; margin-top: 15px" type="submit" class="btn btn-secondary">🔍</button>
+                                </form>
+                            </div>
+                        </form>
+                    </div>
+                 </div>
+            </div>   
+                
             <ul style="list-style-type: none; padding-left: 0;">
                 {% for task in tasks_list_if_admin %}
                     
@@ -133,7 +148,7 @@
                 </form>
             {% if is_paginated %}
                <div class="row text-center py-2">
-    <div class="col-12 mx-auto">
+    <div style="margin-bottom: 120px" class="col-12 mx-auto">
         <ul class="pagination pagination-primary m-4">
             {% if page_obj.has_previous %}
                 <li class="page-item">

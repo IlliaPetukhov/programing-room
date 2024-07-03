@@ -10,7 +10,7 @@ from django.contrib.auth.forms import (
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
-from catalog.models import Programmer
+from catalog.models import Programmer, Tasks
 
 
 class RegistrationForm(UserCreationForm):
@@ -127,3 +127,14 @@ class UserPasswordChangeForm(PasswordChangeForm):
         ),
         label="Confirm New Password",
     )
+
+
+class TasksViewForm(forms.ModelForm):
+    name = forms.CharField(label="",
+                           required=False,
+                           widget=forms.TextInput
+                           (attrs={"placeholder": "Search by name"}))
+
+    class Meta:
+        model = Tasks
+        fields = ('name',)
