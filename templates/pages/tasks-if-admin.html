@@ -19,13 +19,13 @@
     <div class="page-header min-vh-100" style="background-image: url('{% static 'img/curved-images/curved.jpg' %}');">
 
       <span class="mask bg-gradient-info opacity-1"></span>
-      <div style="margin-top: 80px" class="container">
+      <div style="margin-top: 40px" class="container">
         <div  class="row justify-content-center">
           <div class="col-lg-8 text-center mx-auto my-auto">
             <br>
             <br>
             {% if tasks_list_if_admin %}
-                <div class="container" style="margin-left: -465px">
+                <div class="container" style="margin-left: -465px; margin-top: 40px">
                 <div class="row text-center py-2 mt-3">
                     <div class="col-4 mx-auto">
                         <form method="get" action="">
@@ -33,12 +33,25 @@
                                 <form>
                                     {{ search_form }}
                                     <button style="font-size: xx-small; margin-top: 15px" type="submit" class="btn btn-secondary">🔍</button>
+                                    <div style="display: flex; align-items: center; margin-top: -30px; margin-bottom: -10px; margin-left: -20px">
+                                        <div class="container">
+                                            <div class="row text-center py-3 mt-3">
+                                                <div class="col-12">
+                                                    <span class="badge bg-gradient-info">
+                                                        <form>
+                                                            <p1 style="color: white">filter by level</p1> {{ level_form }}
+                                                        </form>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </form>
                     </div>
-                 </div>
-            </div>   
+                </div>
+            </div> 
                 
             <ul style="list-style-type: none; padding-left: 0;">
                 {% for task in tasks_list_if_admin %}
@@ -48,12 +61,13 @@
                          {% if task.level.level == "easy" %}
                                                              
                               <div style="display: flex; align-items: center;">
-                                <span style="margin-right: 4px" class="badge bg-gradient-info">{{ task.level.level }} 😌</span>
+                                <span style="margin-right: 4px" class="badge bg-gradient-info">{{ task.level.level }} </span>
                                 <a class="btn bg-gradient-secondary w-auto me-1 mb-0" 
                                             style="color: white;" 
                                             onmouseover="this.style.color='red';" onmouseout="this.style.color='white';" 
                                             href="{% url 'catalog:task-detail' pk=task.id %}">
-                                            {{ task.name }}
+                                            {{ task.name }} <p1 style="color: red">status: {{ task.status.status }}</p1>
+                                    <p1 style="color: greenyellow;">Programmer: {{ task.programmer.username }}</p1>>
                                 </a>
     
                                 <form method="post" action="{% url 'catalog:update-task' pk=task.id %}" style="display: inline;">
@@ -74,12 +88,13 @@
                          {% elif task.level.level == "medium"%}
                              
                               <div style="display: flex; align-items: center;">
-                                <span style="margin-right: 4px" class="badge bg-gradient-success">{{ task.level.level }} 😉</span>
+                                <span style="margin-right: 4px" class="badge bg-gradient-success">{{ task.level.level }} </span>
                                 <a class="btn bg-gradient-secondary w-auto me-1 mb-0" 
                                             style="color: white;" 
                                             onmouseover="this.style.color='red';" onmouseout="this.style.color='white';" 
                                             href="{% url 'catalog:task-detail' pk=task.id %}">
-                                            {{ task.name }}
+                                            {{ task.name }}  <p1 style="color: red">status: {{ task.status.status }}</p1>
+                                    <p1 style="color: greenyellow;">Programmer: {{ task.programmer.username }}</p1>>
                                 </a>
     
                                 <form method="post" action="{% url 'catalog:update-task' pk=task.id %}" style="display: inline;">
@@ -97,12 +112,13 @@
                          {% elif task.level.level == "hard"%}
                              
                               <div style="display: flex; align-items: center;">
-                                <span style="margin-right: 4px" class="badge bg-gradient-warning">{{ task.level.level }} 😬</span>
+                                <span style="margin-right: 4px" class="badge bg-gradient-warning">{{ task.level.level }} </span>
                                 <a class="btn bg-gradient-secondary w-auto me-1 mb-0" 
                                             style="color: white;" 
                                             onmouseover="this.style.color='red';" onmouseout="this.style.color='white';" 
                                             href="{% url 'catalog:task-detail' pk=task.id %}">
-                                            {{ task.name }}
+                                            {{ task.name }}  <p1 style="color: red">status: {{ task.status.status }}</p1>
+                                    <p1 style="color: greenyellow;">Programmer: {{ task.programmer.username }}</p1>>
                                 </a>
     
                                 <form method="post" action="{% url 'catalog:update-task' pk=task.id %}" style="display: inline;">
@@ -119,12 +135,13 @@
                          {% elif task.level.level == "very hard"%}
                              
                               <div style="display: flex; align-items: center;">
-                                <span style="margin-right: 4px" class="badge bg-gradient-danger">{{ task.level.level }} 🤯</span> 
+                                <span style="margin-right: 4px" class="badge bg-gradient-danger">{{ task.level.level }} </span> 
                                 <a class="btn bg-gradient-secondary w-auto me-1 mb-0" 
                                             style="color: white;" 
                                             onmouseover="this.style.color='red';" onmouseout="this.style.color='white';" 
                                             href="{% url 'catalog:task-detail' pk=task.id %}">
-                                            {{ task.name }}
+                                            {{ task.name }}  <p1 style="color: red">status: {{ task.status.status }}</p1>
+                                    <p1 style="color: greenyellow;">Programmer: {{ task.programmer.username }}</p1>>
                                 </a>
     
                                 <form method="post" action="{% url 'catalog:update-task' pk=task.id %}" style="display: inline;">
@@ -148,7 +165,7 @@
                 </form>
             {% if is_paginated %}
                <div class="row text-center py-2">
-    <div style="margin-bottom: 120px" class="col-12 mx-auto">
+    <div style="margin-bottom: 70px" class="col-12 mx-auto">
         <ul class="pagination pagination-primary m-4">
             {% if page_obj.has_previous %}
                 <li class="page-item">

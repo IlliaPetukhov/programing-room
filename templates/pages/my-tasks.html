@@ -30,7 +30,7 @@
                     <li style="margin-left: -170px; 
                     text-align: left;" class="lead mb-4 text-white opacity-50">
                          {% if task.level.level == "easy" %}
-                              <span  class="badge bg-gradient-info">{{ task.level.level }} 😌</span>                               
+                              <span  class="badge bg-gradient-info">{{ task.level.level }} </span>                               
                               <button type="button" class="btn bg-gradient-secondary w-auto me-1 mb-0">
                                     <a style="color: white;" 
                                     onmouseover="this.style.color='red'"; onmouseout="this.style.color='white'" 
@@ -41,12 +41,13 @@
                                         <button  type="submit" class="btn bg-gradient-success w-auto me-1 mb-0">done</button>
                                     </form>
                                 </button>
+                             
                                 
                              
                              
                               
-                         {% elif task.level.level == "normal"%}
-                             <span  class="badge bg-gradient-success">{{ task.level.level }} 😉</span>
+                         {% elif task.level.level == "medium"%}
+                             <span  class="badge bg-gradient-success">{{ task.level.level }} </span>
                               <button type="button"  class="btn bg-gradient-secondary w-auto me-1 mb-0">
                                     <a style="color: white;" 
                                     onmouseover="this.style.color='red'"; onmouseout="this.style.color='white'" 
@@ -60,7 +61,7 @@
                                 
                                 
                          {% elif task.level.level == "hard"%}
-                             <span  class="badge bg-gradient-warning">{{ task.level.level }} 😬</span>
+                             <span  class="badge bg-gradient-warning">{{ task.level.level }} </span>
                               <button type="button" class="btn bg-gradient-secondary w-auto me-1 mb-0">
                                     <a style="color: white;" 
                                     onmouseover="this.style.color='red'"; onmouseout="this.style.color='white'" 
@@ -73,7 +74,7 @@
                                 </button>
                                 
                          {% elif task.level.level == "very hard"%}
-                             <span class="badge bg-gradient-danger">{{ task.level.level }} 🤯</span>
+                             <span class="badge bg-gradient-danger">{{ task.level.level }} </span>
                               <button type="button" class="btn bg-gradient-secondary w-auto me-1 mb-0">
                                     <a style="color: white;" 
                                     onmouseover="this.style.color='red'"; onmouseout="this.style.color='white'" 
@@ -90,7 +91,7 @@
                     
                 {% endfor %}
             {% if is_paginated %}
-               <div class="row text-center py-2">
+               <div style="margin-bottom: -50px" class="row text-center py-2">
     <div class="col-12 mx-auto">
         <ul class="pagination pagination-primary m-4">
             {% if page_obj.has_previous %}

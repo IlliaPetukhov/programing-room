@@ -20,7 +20,7 @@ from catalog.forms import (
     UserLoginForm,
     UserPasswordResetForm,
     UserSetPasswordForm,
-    UserPasswordChangeForm, TasksViewForm,
+    UserPasswordChangeForm, TasksViewForm, TaskFilterForm,
 )
 from catalog.models import Programmer, Tasks, LevelOfDifficulty, StatusOfTask
 
@@ -40,29 +40,6 @@ def index(request: HttpRequest) -> HttpResponse:
     }
 
     return render(request, "layouts/index.html", context=context)
-
-
-class AboutUs(LoginRequiredMixin, generic.ListView):
-    model = Tasks
-    template_name = "pages/about-us.html"
-    context_object_name = "tasks_list"
-    paginate_by = 5
-
-    def get_context_data(self, **kwargs):
-        context = super(AboutUs, self).get_context_data(**kwargs)
-        name = self.request.GET.get("name")
-        context["search_form"] = TasksViewForm(
-            initial={"name": name},
-        )
-        return context
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.filter(status__status="you can take this task")
-        name = self.request.GET.get("name")
-        if name:
-            queryset = queryset.filter(name__icontains=name)
-        return queryset
 
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
@@ -238,7 +215,6 @@ class MyTaskView(LoginRequiredMixin, generic.ListView, View):
         )
 
 
-
 class IfSuperUser(UserPassesTestMixin, View):
     def test_func(self):
         return self.request.user.is_superuser
@@ -253,6 +229,10 @@ class AllTasksIfAdminView(IfSuperUser, generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(AllTasksIfAdminView, self).get_context_data(**kwargs)
         name = self.request.GET.get("name")
+        level = self.request.GET.get("level")
+        context["level_form"] = TaskFilterForm(
+            initial={"level": level},
+        )
         context["search_form"] = TasksViewForm(
             initial={"name": name},
         )
@@ -261,8 +241,41 @@ class AllTasksIfAdminView(IfSuperUser, generic.ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         name = self.request.GET.get("name")
+        level = self.request.GET.get("level")
         if name:
             queryset = queryset.filter(name__icontains=name)
+        if level:
+            queryset = queryset.filter(level__id=level)
+        return queryset
+
+
+class AboutUs(LoginRequiredMixin, generic.ListView):
+    model = Tasks
+    template_name = "pages/about-us.html"
+    context_object_name = "tasks_list"
+    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super(AboutUs, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name")
+        level = self.request.GET.get("level")
+        context["level_form"] = TaskFilterForm(
+            initial={"level": level},
+        )
+        context["search_form"] = TasksViewForm(
+            initial={"name": name},
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(status__status="you can take this task")
+        name = self.request.GET.get("name")
+        level = self.request.GET.get("level")
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+        if level:
+            queryset = queryset.filter(level__id=level)
         return queryset
 
 

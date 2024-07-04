@@ -10,7 +10,7 @@ from django.contrib.auth.forms import (
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
-from catalog.models import Programmer, Tasks
+from catalog.models import Programmer, Tasks, LevelOfDifficulty
 
 
 class RegistrationForm(UserCreationForm):
@@ -138,3 +138,11 @@ class TasksViewForm(forms.ModelForm):
     class Meta:
         model = Tasks
         fields = ('name',)
+
+
+class TaskFilterForm(forms.Form):
+    level = forms.ModelChoiceField(
+        queryset=LevelOfDifficulty.objects.all(),
+        required=False,
+        label=""
+    )
