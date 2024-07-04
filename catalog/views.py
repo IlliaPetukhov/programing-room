@@ -20,7 +20,9 @@ from catalog.forms import (
     UserLoginForm,
     UserPasswordResetForm,
     UserSetPasswordForm,
-    UserPasswordChangeForm, TasksViewForm, TaskFilterForm,
+    UserPasswordChangeForm,
+    TasksViewForm,
+    TaskFilterForm,
 )
 from catalog.models import Programmer, Tasks, LevelOfDifficulty, StatusOfTask
 
@@ -207,9 +209,9 @@ class MyTaskView(LoginRequiredMixin, generic.ListView, View):
         current_user = self.request.user
         filter_by_current_user = Tasks.objects.filter(programmer=current_user)
 
-        print(filter_by_current_user.filter(
-            status__status="somebody is doing this task"
-        ))
+        print(
+            filter_by_current_user.filter(status__status="somebody is doing this task")
+        )
         return filter_by_current_user.filter(
             status__status="somebody is doing this task"
         )

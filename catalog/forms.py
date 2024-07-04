@@ -130,19 +130,18 @@ class UserPasswordChangeForm(PasswordChangeForm):
 
 
 class TasksViewForm(forms.ModelForm):
-    name = forms.CharField(label="",
-                           required=False,
-                           widget=forms.TextInput
-                           (attrs={"placeholder": "Search by name"}))
+    name = forms.CharField(
+        label="",
+        required=False,
+        widget=forms.TextInput(attrs={"placeholder": "Search by name"}),
+    )
 
     class Meta:
         model = Tasks
-        fields = ('name',)
+        fields = ("name",)
 
 
 class TaskFilterForm(forms.Form):
     level = forms.ModelChoiceField(
-        queryset=LevelOfDifficulty.objects.all(),
-        required=False,
-        label=""
+        queryset=LevelOfDifficulty.objects.all(), required=False, label=""
     )
