@@ -1,5 +1,4 @@
 from django.contrib.auth import logout
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import (
     LoginView,
@@ -12,7 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 
-from django.views.generic import TemplateView, ListView, View
+from django.views.generic import TemplateView, View
 
 
 from catalog.forms import (
@@ -24,7 +23,7 @@ from catalog.forms import (
     TasksViewForm,
     TaskFilterForm,
 )
-from catalog.models import Programmer, Tasks, LevelOfDifficulty, StatusOfTask
+from catalog.models import Programmer, Tasks, StatusOfTask
 
 
 def index(request: HttpRequest) -> HttpResponse:
@@ -41,7 +40,8 @@ def index(request: HttpRequest) -> HttpResponse:
         "num_visits": num_visits + 1,
     }
 
-    return render(request, "layouts/index.html", context=context)
+    return render(request, "layouts/index.html",
+                  context=context)
 
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
@@ -51,10 +51,6 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
 
 class ContactUs(LoginRequiredMixin, TemplateView):
     template_name = "pages/contact-us.html"
-
-
-class Author(LoginRequiredMixin, TemplateView):
-    template_name = "pages/author.html"
 
 
 def register(request):
@@ -70,7 +66,8 @@ def register(request):
         form = RegistrationForm()
 
     context = {"form": form}
-    return render(request, "accounts/sign-up.html", context)
+    return render(request, "accounts/sign-up.html",
+                  context)
 
 
 class UserLoginView(LoginView):
@@ -88,7 +85,8 @@ class UserPasswordResetView(LoginRequiredMixin, PasswordResetView):
     form_class = UserPasswordResetForm
 
 
-class UserPasswordResetConfirmView(LoginRequiredMixin, PasswordResetConfirmView):
+class UserPasswordResetConfirmView(LoginRequiredMixin,
+                                   PasswordResetConfirmView):
     template_name = "accounts/password_reset_confirm.html"
     form_class = UserSetPasswordForm
 
@@ -96,83 +94,6 @@ class UserPasswordResetConfirmView(LoginRequiredMixin, PasswordResetConfirmView)
 class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     template_name = "accounts/password_change.html"
     form_class = UserPasswordChangeForm
-
-
-# Sections
-def presentation(request):
-    return render(request, "sections/presentation.html")
-
-
-def page_header(request):
-    return render(request, "sections/page-sections/hero-sections.html")
-
-
-def features(request):
-    return render(request, "sections/page-sections/features.html")
-
-
-def navbars(request):
-    return render(request, "sections/navigation/navbars.html")
-
-
-def nav_tabs(request):
-    return render(request, "sections/navigation/nav-tabs.html")
-
-
-def pagination(request):
-    return render(request, "sections/navigation/pagination.html")
-
-
-def inputs(request):
-    return render(request, "sections/input-areas/inputs.html")
-
-
-def forms(request):
-    return render(request, "sections/input-areas/forms.html")
-
-
-def avatars(request):
-    return render(request, "sections/elements/avatars.html")
-
-
-def badges(request):
-    return render(request, "sections/elements/badges.html")
-
-
-def breadcrumbs(request):
-    return render(request, "sections/elements/breadcrumbs.html")
-
-
-def buttons(request):
-    return render(request, "sections/elements/buttons.html")
-
-
-def dropdowns(request):
-    return render(request, "sections/elements/dropdowns.html")
-
-
-def progress_bars(request):
-    return render(request, "sections/elements/progress-bars.html")
-
-
-def toggles(request):
-    return render(request, "sections/elements/toggles.html")
-
-
-def typography(request):
-    return render(request, "sections/elements/typography.html")
-
-
-def alerts(request):
-    return render(request, "sections/attention-catchers/alerts.html")
-
-
-def modals(request):
-    return render(request, "sections/attention-catchers/modals.html")
-
-
-def tooltips(request):
-    return render(request, "sections/attention-catchers/tooltips-popovers.html")
 
 
 class ChangeTaskStatus(LoginRequiredMixin, View):
@@ -208,10 +129,6 @@ class MyTaskView(LoginRequiredMixin, generic.ListView, View):
     def get_queryset(self):
         current_user = self.request.user
         filter_by_current_user = Tasks.objects.filter(programmer=current_user)
-
-        print(
-            filter_by_current_user.filter(status__status="somebody is doing this task")
-        )
         return filter_by_current_user.filter(
             status__status="somebody is doing this task"
         )
