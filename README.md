@@ -10,30 +10,30 @@ ___
  + **List of tasks**
  + **My tasks**
   
-  ![Alt text](D2901E0E-D2A4-4180-BF23-543D145BF693-1.jpeg)  
+  ![Alt text](photos_for_README/D2901E0E-D2A4-4180-BF23-543D145BF693-1.jpeg)  
    
 *And one more extra page for admins:*    
 + **Tasks for admins**
 
 
-![Alt text](4C7988FF-C9A5-4594-A548-8B2F9015FBD9.jpeg)
+![Alt text](photos_for_README/4C7988FF-C9A5-4594-A548-8B2F9015FBD9.jpeg)
 #### 1. `Home`
 
    **It's page where you can see the count of tasks, count of programmer in the company and how many times you have visited this page**
 
-![Alt text](15587A72-7324-435D-8E82-CEA71CB56DE0.jpeg)
+![Alt text](photos_for_README/15587A72-7324-435D-8E82-CEA71CB56DE0.jpeg)
 
 #### 2. `List of tasks`
 
    **It's page where you can see all tasks that company has**
 
-![Alt text](876F0641-C88D-4049-AC69-12EF7A33CF99.jpeg)   
+![Alt text](photos_for_README/876F0641-C88D-4049-AC69-12EF7A33CF99.jpeg)   
 
 #### 3. `My tasks`
 
    **It's page where you can see all tasks that you have taken**
 
-![Alt text](E4F06F2B-5BD3-40D4-8CCA-A0D2E1E6659C.jpeg)   
+![Alt text](photos_for_README/E4F06F2B-5BD3-40D4-8CCA-A0D2E1E6659C.jpeg)   
 
 #### 3. `Tasks for admins`
 
@@ -42,7 +42,7 @@ ___
    + Delete tasks
    + Create tasks
   
-![Alt text](B7948DC3-CE2D-4F6D-8A85-A04663EA358A.jpeg)
+![Alt text](photos_for_README/B7948DC3-CE2D-4F6D-8A85-A04663EA358A.jpeg)
 
 ___
 ## You have to install package using this command
