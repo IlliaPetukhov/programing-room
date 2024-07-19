@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
 
 from django.test import TestCase
 from django.urls import reverse
@@ -13,15 +14,17 @@ class ViewTests(TestCase):
             password="Gitarist2005",
             first_name="Test",
             last_name="Test",
-            )
+        )
         self.level = LevelOfDifficulty.objects.create(level="easy")
         self.status = StatusOfTask.objects.create(status="you can take this task")
+        StatusOfTask.objects.create(status="done")
+        StatusOfTask.objects.create(status="somebody is doing this task")
         self.task = Tasks.objects.create(
             name="Test Task",
             description="Test Description",
             status=self.status,
             level=self.level,
-            programmer=self.user
+            programmer=self.user,
         )
         self.client.force_login(self.user)
 
@@ -62,3 +65,18 @@ class ViewTests(TestCase):
         self.user.save()
         response = self.client.get(reverse("catalog:tasks-if-admin"))
         self.assertNotEqual(response.status_code, 200)
+
+    def test_change_status_if_tap_plus_or_done(self):
+        if self.task.status.status == "you can take this task":
+            self.client.post(
+                reverse("catalog:change_task_status", kwargs={"pk": self.task.id})
+            )
+            self.task.refresh_from_db()
+            self.assertEqual(self.task.status.status, "somebody is doing this task")
+
+        if self.task.status.status == "somebody is doing this task":
+            self.client.post(
+                reverse("catalog:change_task_status", kwargs={"pk": self.task.id})
+            )
+            self.task.refresh_from_db()
+            self.assertEqual(self.task.status.status, "done")

@@ -40,8 +40,7 @@ def index(request: HttpRequest) -> HttpResponse:
         "num_visits": num_visits + 1,
     }
 
-    return render(request, "layouts/index.html",
-                  context=context)
+    return render(request, "layouts/index.html", context=context)
 
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
@@ -66,8 +65,7 @@ def register(request):
         form = RegistrationForm()
 
     context = {"form": form}
-    return render(request, "accounts/sign-up.html",
-                  context)
+    return render(request, "accounts/sign-up.html", context)
 
 
 class UserLoginView(LoginView):
@@ -85,8 +83,7 @@ class UserPasswordResetView(LoginRequiredMixin, PasswordResetView):
     form_class = UserPasswordResetForm
 
 
-class UserPasswordResetConfirmView(LoginRequiredMixin,
-                                   PasswordResetConfirmView):
+class UserPasswordResetConfirmView(LoginRequiredMixin, PasswordResetConfirmView):
     template_name = "accounts/password_reset_confirm.html"
     form_class = UserSetPasswordForm
 
