@@ -28,9 +28,10 @@ load_dotenv(dotenv_path=".env")
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1",
+                 "localhost",]
 
 
 # Application definition
@@ -138,4 +139,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DJANGO_SETTINGS_MODULE = "programing_room.settings"
 
-LOGIN_REDIRECT_URL = "catalog:index"
+LOGIN_REDIRECT_URL = "/"
