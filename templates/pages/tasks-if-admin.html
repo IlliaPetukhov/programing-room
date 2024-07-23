@@ -159,13 +159,10 @@
                     </li>
                     
                 {% endfor %}
-                <form method="post" action="{% url 'catalog:create-task' %}" style="display: inline; margin-left: -1040px">
-                    {% csrf_token %}
-                    <button style="font-size: x-small" type="submit" class="btn bg-gradient-primary w-auto me-1 mb-0">Create new task</button>
-                </form>
+                
             {% if is_paginated %}
                <div class="row text-center py-2">
-    <div style="margin-bottom: 70px" class="col-12 mx-auto">
+    <div style="margin-bottom: -120px" class="col-12 mx-auto">
         <ul class="pagination pagination-primary m-4">
             {% if page_obj.has_previous %}
                 <li class="page-item">
@@ -196,10 +193,13 @@
             {% else %}
                 <h1 class="text-white">Sorry but now we have no task for you</h1> 
             {% endif %}  
-
+            <form style="margin-bottom: 120px; margin-left: -1045px" method="post" action="{% url 'catalog:create-task' %}" style="display: inline; margin-left: -1040px">
+                    {% csrf_token %}
+                    <button style="font-size: x-small" type="submit" class="btn bg-gradient-primary w-auto me-1 mb-0">Create new task</button>
+            </form>
           </div>
         </div>
-      </div>
+      </div >
       <div class="position-absolute w-100 z-index-1 bottom-0">
         <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
           <defs>
