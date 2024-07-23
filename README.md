@@ -50,3 +50,7 @@ ___
 
 ## Use this command for start the project 
 `python manage.py runserver`
+
+## You can use this account for this website
+`username: user` 
+`password: user12345`
