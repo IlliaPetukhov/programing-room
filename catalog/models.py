@@ -16,7 +16,7 @@ class Programmer(AbstractUser):
         verbose_name_plural = "programmers"
 
     def __str__(self) -> str:
-        return f"{self.username} ({self.first_name} {self.last_name})"
+        return f"{self.username}"
 
     # def get_absolute_url(self) -> dict:
     # return reverse("taxi:driver-detail", kwargs={"pk": self.pk})
