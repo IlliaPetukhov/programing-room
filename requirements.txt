@@ -9,6 +9,7 @@ Faker==25.9.1
 flake8==5.0.4
 flake8-quotes==3.3.1
 flake8-variables-names==0.0.5
+gunicorn==22.0.0
 mccabe==0.7.0
 mypy-extensions==1.0.0
 packaging==24.1
